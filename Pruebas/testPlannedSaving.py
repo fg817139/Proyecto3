@@ -1,7 +1,7 @@
 import unittest
 from datetime import date
 import Exemptionstop
-from Models.CreditCard import CreditCard
+from Modelos.CreditCard import CreditCard
 
 
 class TestPlannedSaving(unittest.TestCase):

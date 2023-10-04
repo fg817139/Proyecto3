@@ -1,8 +1,8 @@
 import unittest
 from datetime import date
 
-from Controllers import ControllerPaymentPlan
-from Controllers import ControllerCreditCard
+from controlador import ControllerPaymentPlan
+from controlador import ControllerCreditCard
 import testControllerCreditCards
 from testPaymentPlan import ControllerPaymentPlanTest
 

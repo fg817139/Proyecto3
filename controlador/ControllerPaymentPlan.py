@@ -2,8 +2,8 @@ import sys
 import psycopg2
 import SecretConfig
 from datetime import date
-from Models.CreditCard import CreditCard
-from Models.PaymentPlan import PaymentPlan
+from Modelos.CreditCard import CreditCard
+from Modelos.PaymentPlan import PaymentPlan
 
 
 def get_cursor():

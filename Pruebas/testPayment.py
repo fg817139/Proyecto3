@@ -2,16 +2,15 @@ import unittest
 from datetime import date
 
 import Exemptionstop
-from Models.CreditCard import CreditCard
-from Controllers import ControllerCreditCard
+from Modelos.CreditCard import CreditCard
+from controlador import ControllerCreditCard
 import testControllerCreditCards
 
 
 class TestPayment(unittest.TestCase):
     """Tests for the calc monthly payment and calc total interest functions"""
 
-    # TEST FIXTURES
-    # Code that runs before each test
+
 
     def setUpClass(self):
         """ Executed at the beginning of all tests """
@@ -128,3 +127,7 @@ class TestPayment(unittest.TestCase):
         installments: int = 10
 
         self.assertRaises(Exemptionstop.CardNotFoundError, ControllerCreditCard.search_by_card_id, card_number)
+
+
+if __name__ == '__main__':
+    unittest.main()

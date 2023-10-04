@@ -1,5 +1,5 @@
 from datetime import date, datetime, timedelta
-from Models.CreditCard import CreditCard
+from Modelos.CreditCard import CreditCard
 
 
 class PaymentPlan:

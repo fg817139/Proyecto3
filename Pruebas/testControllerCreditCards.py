@@ -2,22 +2,21 @@ import unittest
 from datetime import date
 
 import Exemptionstop
-from Models.CreditCard import CreditCard
-from Controllers import ControllerCreditCard
+from Modelos.CreditCard import CreditCard
+from controlador import ControllerCreditCard
 
 
 class TestControllerCreditCard(unittest.TestCase):
     """Tests for the Controller Class of the credit card"""
 
-    # TEST FIXTURES
-    # Code that runs before each test
+
 
     def setUpClass(self):
         """ Executed at the beginning of all tests """
         print("Invoking setUpClass")
         ControllerCreditCard.create_table()  # Ensure that at the beginning of the tests, the table is created
 
-    def tearDownClas(self):
+    def tearDownClass(self):
         """ Executed at the end of all tests """
         print("Invoking tearDownClass")
         ControllerCreditCard.delete_all_rows()
@@ -92,7 +91,7 @@ class TestControllerCreditCard(unittest.TestCase):
 
         credit_card_test = CreditCard(card_number, owner_id, owner_name, bank_name, due_date, franchise, payment_day, monthly_fee, interest_rate)
 
-        self.assertRaises(Exceptions.CreditCardAlreadyExists, ControllerCreditCard.insert_credit_card, credit_card_test)
+        self.assertRaises(Exemptionstop.CreditCardAlreadyExists, ControllerCreditCard.insert_credit_card, credit_card_test)
 
     def test_01_insert_credit_card_4(self):
         """Verifies that the credit card is inserted succesfully in the database"""
@@ -229,7 +228,7 @@ class TestControllerCreditCard(unittest.TestCase):
                                  searched_card.bank_name, searched_card.due_date, searched_card.franchise,
                                  searched_card.payment_day, searched_card.monthly_fee, searched_card.interest_rate)
 
-        self.assertRaises(Exceptions.ZeroAmountError, credit_card.calc_monthly_payment, amount, installments)
+        self.assertRaises(Exemptionstop.ZeroAmountError, credit_card.calc_monthly_payment, amount, installments)
 
     def test_02_credit_card_purchase_6(self):
         amount: float = 50000
@@ -242,4 +241,15 @@ class TestControllerCreditCard(unittest.TestCase):
                                  searched_card.bank_name, searched_card.due_date, searched_card.franchise,
                                  searched_card.payment_day, searched_card.monthly_fee, searched_card.interest_rate)
 
-        self.assertRaises(Exceptions.NegativeNumberOfPaymentsError, credit_card.calc_monthly_payment, amount, installments)
+        self.assertRaises(Exemptionstop.NegativeNumberOfPaymentsError, credit_card.calc_monthly_payment, amount, installments)
+
+    def test_02_credit_card_purchase_7(self):
+        amount: float = 50000
+        card_number: str = "885522"
+        installments: int = 10
+
+        self.assertRaises(Exemptionstop.CardNotFoundError, ControllerCreditCard.search_by_card_id, card_number)
+
+
+if __name__ == '__main__':
+    unittest.main()

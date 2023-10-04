@@ -2,31 +2,26 @@ import unittest
 from datetime import date
 import datetime
 
-from Models.PaymentPlan import PaymentPlan
-from Controllers import ControllerPaymentPlan
-from Controllers import ControllerCreditCard
-from Models.PaymentPlan import PaymentPlan
+from Modelos.PaymentPlan import PaymentPlan
+from controlador import ControllerPaymentPlan
+from controlador import ControllerCreditCard
+
 import testControllerCreditCards
 
 
 class ControllerPaymentPlanTest(unittest.TestCase):
-    """
-    Tests for the Controller Class of the credit card
-    """
 
-    # TEST FIXTURES
-    # Code that runs before each test
 
     def setUp(self):
         ControllerPaymentPlan.delete_all_rows()
 
     def setUpClass(self):
-        """ Executed at the beginning of all tests """
-        print("Invoking setUpClass")
-        ControllerPaymentPlan.create_table()  # Ensure that at the beginning of the tests, the table is created
+
+        ControllerPaymentPlan.create_table()
+        ControllerCreditCard.delete_all_rows()
         print("Invoking setUpClass")
         ControllerCreditCard.create_table()
-        tests_credit_cards = testControllerCreditCards.TestControllerCreditCard()  # Ensure that at the beginning of the tests, the table is created
+        tests_credit_cards = testControllerCreditCards.TestControllerCreditCard()
         tests_credit_cards.test_01_insert_credit_card_1()
         tests_credit_cards.test_01_insert_credit_card_2()
         tests_credit_cards.test_01_insert_credit_card_4()
@@ -35,7 +30,6 @@ class ControllerPaymentPlanTest(unittest.TestCase):
     def tearDownClass(self):
         """ Executed at the end of all tests """
         print("Invoking tearDownClass")
-        ControllerPaymentPlan.delete_all_rows()
         ControllerCreditCard.delete_all_rows()
 
     def test_04_payment_plan_1(self):
@@ -81,12 +75,10 @@ class ControllerPaymentPlanTest(unittest.TestCase):
         installments: int = 1
 
         payment_plan = ControllerPaymentPlan.insert_payment_plan(card_number, amount, purchase_date, installments)
-        print(payment_plan)
         expected = [[1, '445566', datetime.date(2023, 11, 17), 90000, datetime.date(2023, 12, 5), 90000.0, 0.0, 90000.0, 0.0]]
         result = ControllerPaymentPlan.get_payment_plan()
         self.assertEqual(expected, result)
 
 
-
-
-
+if __name__ == '__main__':
+    unittest.main()

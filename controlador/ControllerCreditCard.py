@@ -3,7 +3,7 @@ import psycopg2
 import SecretConfig
 import Exemptionstop
 from datetime import date
-from Models.CreditCard import CreditCard
+from Modelos.CreditCard import CreditCard
 
 
 

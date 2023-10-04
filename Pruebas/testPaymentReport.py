@@ -10,8 +10,7 @@ from testPaymentPlan import ControllerPaymentPlanTest
 class TestPaymentReport(unittest.TestCase):
     """Tests for the calc total payment in x interval"""
 
-    # TEST FIXTURES
-    # Code that runs before each test
+
 
     def setUp(self):
         card_number: str = "556677"

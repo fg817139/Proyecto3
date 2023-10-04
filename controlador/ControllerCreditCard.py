@@ -25,7 +25,7 @@ def create_table():
     Creates  table if it does not exist
     """
     sql = ""
-    with open("../sql/create-credit-card.sql", "r") as f:
+    with open("../sql/create-credit.sql", "r") as f:
         sql = f.read()
 
     slider = get_slider()

@@ -24,7 +24,7 @@ def create_table():
     Creates  table if it does not exist
     """
     sql = ""
-    with open("../sql/create-payment-plan.sql", "r") as f:
+    with open("../sql/create-payment.sql", "r") as f:
         sql = f.read()
 
     cursor = get_cursor()

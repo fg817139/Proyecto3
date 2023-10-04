@@ -3,6 +3,7 @@ import psycopg2
 import SecretConfig
 from datetime import date
 from Modelos.CreditCard import CreditCard
+
 from Modelos.PaymentPlan import PaymentPlan
 
 
@@ -24,7 +25,7 @@ def create_table():
     Creates  table if it does not exist
     """
     sql = ""
-    with open("../sql/create-payment.sql", "r") as f:
+    with open("../sql/create-payment-plan.sql", "r") as f:
         sql = f.read()
 
     cursor = get_cursor()
@@ -73,7 +74,6 @@ def insert_payment_plan(card_number, purchase_amount, purchase_date, installment
     payment_plan = PaymentPlan(card_number, purchase_date, purchase_amount)
 
     table = payment_plan.calc_payment_plan(credit_card, installments)
-    print(table)
     for row in table:
         sql = f"""INSERT INTO payment_plans(
             Number, card_number, purchase_date, purchase_amount, payment_date, payment_amount, interest_amount,
@@ -107,4 +107,4 @@ def calc_total_payment_in_x_interval(initial_date: date, final_date: date):
     for amount in amounts:
         total += amount[0]
 
-    return total
+    return round(total)

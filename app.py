@@ -29,7 +29,7 @@ def insert_credit_card():
         search_credit_card = ControllerCreditCard.search_by_card_id(card_number)
 
         return {"status": "ok",
-                "message": "Credit card created succesfully",
+                "message": "Credit card created ",
                 "credit card": search_credit_card}
     except Exception as err:
         return {"status": "error",
@@ -60,9 +60,7 @@ def simulate_purchase():
 #/api/simulate/saving?card_number=123123&purchase_amount=50000&payments=24
 @app.route('/api/simulate/saving')
 def simulate_planned_saving():
-    """
-    The function for planned saving receives a credit card and get the interest rate from that credit card
-    """
+
 
     try:
 

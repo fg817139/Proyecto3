@@ -8,6 +8,7 @@ from datetime import date
 app = Flask(__name__)
 
 #/api/card/new?card_number=123123&owner_id=13124&owner_name=ola&bank_name=ola&due_date=2028-09-12&franchise=ola&payment_day=09&monthly_fee=12000&interest_rate=3
+
 @app.route('/api/card/new')
 def insert_credit_card():
     try:

@@ -7,7 +7,7 @@ from Modelos.CreditCard import CreditCard
 
 
 
-def get_slider():
+def get_cursor():
     """
     Create the connection to the database and return a cursor to execute instructions
     """
@@ -17,7 +17,7 @@ def get_slider():
     HOST = SecretConfig.HOST
     PORT = SecretConfig.PORT
     connection = psycopg2.connect(database=DATABASE, user=USER, password=PASSWORD, host=HOST, port=PORT)
-    return connection.slider()
+    return connection.cursor()
 
 
 def create_table():
@@ -28,16 +28,16 @@ def create_table():
     with open("../sql/create-credit.sql", "r") as f:
         sql = f.read()
 
-    slider = get_slider()
+    cursor = get_cursor()
 
     try:
-        slider.execute(sql)
-        slider.connection.commit()
+        cursor.execute(sql)
+        cursor.connection.commit()
         print("Table created succesfully")
     except Exception as err:
         # Table already exists
         print(err)
-        slider.connection.rollback()
+        cursor.connection.rollback()
 
 
 def delete_table():
@@ -45,9 +45,9 @@ def delete_table():
     Deletes the table completely and all its data
     """
     sql = "DROP TABLE credit_cards;"
-    slider = get_slider()
-    slider.execute(sql)
-    slider.connection.commit()
+    cursor = get_cursor()
+    cursor.execute(sql)
+    cursor.connection.commit()
 
 
 def delete_all_rows():
@@ -55,9 +55,9 @@ def delete_all_rows():
     Deletes all the rows of the table
     """
     sql = "DELETE FROM credit_cards"
-    slider = get_slider()
-    slider.execute(sql)
-    slider.connection.commit()
+    cursor = get_cursor()
+    cursor.execute(sql)
+    cursor.connection.commit()
 
 
 def delete_single_credit_card(credit_card):
@@ -65,15 +65,15 @@ def delete_single_credit_card(credit_card):
     Deletes a single credit card from the table
     """
     sql = f"DELETE FROM credit_cards WHERE card_number = '{credit_card.card_number}'"
-    slider = get_slider()
-    slider.execute(sql)
-    slider.connection.commit()
+    cursor = get_cursor()
+    cursor.execute(sql)
+    cursor.connection.commit()
 
 
 def insert_credit_card(credit_card: CreditCard):
     """Saves a credit_card in the database"""
 
-    slider = get_slider()
+    cursor = get_cursor()
 
     try:
 
@@ -91,7 +91,7 @@ def insert_credit_card(credit_card: CreditCard):
 
     try:
 
-        slider.execute(f"""
+        cursor.execute(f"""
         INSERT INTO credit_cards (
             card_number, owner_id, owner_name, bank_name, due_date, franchise, payment_day, monthly_fee, interest_rate
         )
@@ -103,18 +103,17 @@ def insert_credit_card(credit_card: CreditCard):
         );
                         """)
 
-        slider.connection.commit()
+        cursor.connection.commit()
         print("Credit card saved succesfully")
     except Exception as err:
         print(err)
-        slider.connection.rollback()
+        cursor.connection.rollback()
 
 
 def search_by_card_id(card_number):
-    slider = get_slider()
-    slider.execute(f"""SELECT card_number, owner_id, owner_name, bank_name, due_date, franchise, payment_day, monthly_fee, 
-    interest_rate FROM credit_cards where card_number = '{card_number}'""")
-    row = slider.fetchone()
+    cursor = get_cursor()
+    cursor.execute(f"""SELECT card_number,owner_id,owner_name,bank_name,due_date,franchise,payment_day,monthly_fee,interest_rate FROM credit_cards where card_number = '{card_number}'""")
+    row = cursor.fetchone()
 
     if row is None:
         raise Exemptionstop.CardNotFoundError

@@ -12,7 +12,7 @@ pip install psycopg2
 - Create the tables in the database by executing the create_table() functions in ControllerCreditCard and ControllerPaymentPlan
 
 
-# Web server
+# Web 
 
 - Run the following command to install flask:
     pip install flask

@@ -7,6 +7,31 @@ from datetime import date
 
 app = Flask(__name__)
 
+
+#/api/search/cc?card_number=123123
+@app.route('/api/search/cc')
+def search_credit_card():
+    try:
+        card_number = request.args["card_number"]
+
+        searched_credit_card = ControllerCreditCard.search_by_card_id(card_number)
+
+        return {"status": "ok",
+                "message": "Credit card created ",
+                "card_number": f"{searched_credit_card.card_number}",
+                "owner_name": f"{searched_credit_card.owner_name}",
+                "owner_id": f"{searched_credit_card.owner_id}",
+                "bank_name": f"{searched_credit_card.bank_name}",
+                "due_date": f"{searched_credit_card.due_date}",
+                "franchise": f"{searched_credit_card.franchise}",
+                "payment_day": f"{searched_credit_card.payment_day}",
+        }
+    except Exception as err:
+        return {"status": "error",
+                "message": "Request could not be completed",
+                "error": str(err)}
+
+
 #/api/card/new?card_number=123123&owner_id=13124&owner_name=ola&bank_name=ola&due_date=2028-09-12&franchise=ola&payment_day=09&monthly_fee=12000&interest_rate=3
 
 @app.route('/api/card/new')

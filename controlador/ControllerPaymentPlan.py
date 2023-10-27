@@ -108,3 +108,4 @@ def calc_total_payment_in_x_interval(initial_date: date, final_date: date):
         total += amount[0]
 
     return round(total)
+

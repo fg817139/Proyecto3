@@ -2,7 +2,7 @@
 
 por: Andres Felipe Gonzalez P.
 
-## Database configuracion
+# Database configuracion
 
 - Run the following command to install PsycoPG2 on your project:
 pip install psycopg2
@@ -12,7 +12,7 @@ pip install psycopg2
 - Create the tables in the database by executing the create_table() functions in ControllerCreditCard and ControllerPaymentPlan
 
 
-## Web server
+# Web server
 
 - Run the following command to install flask:
     pip install flask

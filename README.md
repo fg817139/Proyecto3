@@ -18,3 +18,7 @@ pip install psycopg2
     pip install flask
 
 - Execute the web server running the app.py module, then open the adress given in the terminal and use the route you want.
+
+# Apli web
+
+-

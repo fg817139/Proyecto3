@@ -8,9 +8,7 @@ from Modelos.PaymentPlan import PaymentPlan
 
 
 def get_cursor():
-    """
-    Create the connection to the database and return a cursor to execute instructions
-    """
+
     DATABASE = SecretConfig.DATABASE
     USER = SecretConfig.USER
     PASSWORD = SecretConfig.PASSWORD
@@ -21,9 +19,7 @@ def get_cursor():
 
 
 def create_table():
-    """
-    Creates  table if it does not exist
-    """
+
     sql = ""
 
     with open("../sql/create-payment.sql", "r") as f:
@@ -41,9 +37,7 @@ def create_table():
 
 
 def delete_table():
-    """
-    Deletes the table completely and all its data
-    """
+
     sql = "DROP TABLE payment_plans;"
     cursor = get_cursor()
     cursor.execute(sql)
@@ -51,9 +45,7 @@ def delete_table():
 
 
 def delete_all_rows():
-    """
-    Deletes all the rows of the table
-    """
+
     sql = "DELETE FROM payment_plans"
     cursor = get_cursor()
     cursor.execute(sql)
@@ -61,7 +53,7 @@ def delete_all_rows():
 
 
 def insert_payment_plan(card_number, purchase_amount, purchase_date, installments):
-    """Inserts a payment plan in the database, where each row is an installment"""
+
     cursor = get_cursor()
     sql = f"""SELECT card_number, owner_id, owner_name, bank_name, due_date, franchise, payment_day, monthly_fee, 
     interest_rate FROM credit_cards WHERE card_number = '{card_number}'"""
@@ -99,7 +91,7 @@ def get_payment_plan():
 
 
 def calc_total_payment_in_x_interval(initial_date: date, final_date: date):
-    """Calculates the sum of the monthly payments in a specified range of months"""
+
     cursor = get_cursor()
     cursor.execute(f"""SELECT payment_amount FROM payment_plans WHERE payment_date >= '{initial_date}'
                         and payment_date <= '{final_date}'

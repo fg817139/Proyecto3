@@ -6,7 +6,6 @@ from datetime import date
 from Modelos.CreditCard import CreditCard
 
 
-
 def get_cursor():
     """
     Create the connection to the database and return a cursor to execute instructions

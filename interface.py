@@ -36,10 +36,9 @@ def view_pay():
 
 
 #------------------------------------------------------------------------------------------------------------------
-
-
+# inserts the credit card in the database
 @interface.route('/interface/insert/create-credit-card')
-def insert_credit_card():
+def view_insert_credit_card():
    try:
       card_number = request.args["card_number"]
       owner_id = request.args["owner_id"]
@@ -64,9 +63,9 @@ def insert_credit_card():
       return str(err)
 
 
-
+# Simulates a purchase and shows the monthly payment, the total interest and the suggested planned saving.
 @interface.route('/interface/insert/simulate-purchase')
-def purchase():
+def view_show_purchase():
    try:
       card_number = request.args["card_number"]
       purchase_amount = float(request.args["purchase_amount"])
@@ -92,9 +91,9 @@ def purchase():
       return str(err)
 
 
-
+# Inserts a payment plan in the database
 @interface.route('/interface/insert/payment-plan')
-def payment_plan():
+def insert_payment_plan():
    try:
       card_number = request.args["card_number"]
       purchase_amount = float(request.args["purchase_amount"])
@@ -111,9 +110,9 @@ def payment_plan():
       return str(err)
 
 
-
+# Shows the total payment outstanding in a given interval of months
 @interface.route("/interface/insert/view-payments")
-def payments():
+def calc_payments():
    try:
       inintial_date = request.args["initial_date"]
       final_date = request.args["final_date"]
@@ -127,7 +126,6 @@ def payments():
 
    except Exception as err:
       return str(err)
-
 
 
 

@@ -21,4 +21,6 @@ pip install psycopg2
 
 # Apli web
 
--
+-Run the following command in your terminal to install flask: pip install flask
+
+Execute the web user interface running the view.py module, then go to the adress given in the terminal and navigate between the different options.

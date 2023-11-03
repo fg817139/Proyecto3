@@ -1,14 +1,22 @@
 from datetime import date
 import Exemptionstop
-
+from dataclasses import dataclass
 
 MAXANUALINTEREST = 100
 
-
+@dataclass()
 class CreditCard:
-    """
-    Represents a credit card in the system
-    """
+
+    card_number: str
+    owner_id: str
+    owner_name: str
+    bank_name: str
+    due_date: date
+    franchise: str
+    payment_day: int
+    monthly_fee: float
+    interest_rate: float
+
     def __init__(self, card_number, owner_id, owner_name, bank_name, due_date, franchise, payment_day, monthly_fee,
                  interest_rate):
         self.card_number: int = card_number
@@ -24,9 +32,7 @@ class CreditCard:
         self.interest_percentage = self.interest_rate/100
 
     def calc_monthly_payment(self, amount: float, installments: int) -> float:
-        """
-        Calculates the monthly payment for an installment purchase
-        """
+
         if amount == 0:
             raise Exemptionstop.ZeroAmountError
         elif installments <= 0:
@@ -39,16 +45,13 @@ class CreditCard:
             return round((amount * self.interest_percentage)/(1 - (1 + self.interest_percentage)**(-installments)), 4)
 
     def calc_total_interest(self, amount: float, installments: int) -> float:
-        """calculates the total interest payment for an installment purchase"""
+
         payment_value: float = self.calc_monthly_payment(amount, installments)
         total_interest: float = round((payment_value * installments) - amount, 2)
         return total_interest
 
     def calc_planned_saving(self, monthly_amount: float, total_amount: float) -> int:
-        """
-        calculates the number of months that the user should save to make the same
-        purchase instead of buying it in installments
-        """
+
         total_interest: float = 0
         subtotal: float = 0
         payment_number: int = 0
